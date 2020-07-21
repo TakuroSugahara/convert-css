@@ -47,17 +47,6 @@ export default {
     }
   },
   computed: {
-    baseCode() {
-      return `
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 0%;
-        bottom: 0%;
-        background: #FFFFFF;
-        box-shadow: 0px 1px 0px rgba(211, 212, 217, 0.95);
-      `
-    },
     convertedCode() {
       return this.replaceSemiColon(
         this.replaceColon(
@@ -69,15 +58,15 @@ export default {
   methods: {
     removeBlankRow(originCode) {
       // 空白、空行の削除
-      return originCode.replace(/(^[ \t]*\n)/gm, '').replace(/\s+/g, '')
+      return originCode.replace(/(^[ \t]*\n)/gm, '')
     },
     replaceColon(originCode) {
       // コロンに空白を追加
-      return originCode.replace(/:/g, ": '")
+      return originCode.replace(/:\s?/g, ": '")
     },
     replaceSemiColon(originCode) {
       // セミコロンを改行とコンマに変換
-      return originCode.replace(/;/g, "',\n").replace(/\n$/, '')
+      return originCode.replace(/;/g, "',").replace(/\n$/, '')
     },
     replaceChamelCase(originCode) {
       return originCode.replace(/-./g, (s) => s.charAt(1).toUpperCase())
